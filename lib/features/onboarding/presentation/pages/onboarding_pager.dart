@@ -24,7 +24,6 @@ class _OnboardingPagerState extends State<OnboardingPager> {
 
   @override
   void dispose() {
-    _controller.onClose();
     Get.delete<OnboardingController>();
     super.dispose();
   }

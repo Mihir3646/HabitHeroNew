@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'routes/app_pages.dart';
+import 'features/onboarding/bindings.dart';
 
 void main() {
   runApp(const HabitHeroApp());
@@ -17,6 +18,7 @@ class HabitHeroApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF43A047)),
       ),
+      initialBinding: OnboardingBinding(),
       routerConfig: router,
     );
   }

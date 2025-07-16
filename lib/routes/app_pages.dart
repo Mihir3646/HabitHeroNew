@@ -10,12 +10,10 @@ GoRouter createRouter() {
   return GoRouter(
     initialLocation: AppRoutes.onboarding,
     routes: [
+      // Onboarding route
       GoRoute(
         path: AppRoutes.onboarding,
         builder: (context, state) => OnboardingPager(),
-        path: '/',
-        builder: (context, state) =>
-            onboardingComplete ? const HomePage() : const IntroPage(initialPage: 0),
         routes: [
           if (!onboardingComplete) ...[
             GoRoute(
@@ -27,13 +25,14 @@ GoRouter createRouter() {
               builder: (context, state) => const IntroPage(initialPage: 2),
             ),
           ],
-          GoRoute(
-            path: 'home',
-            builder: (context, state) => const HomePage(),
-          ),
         ],
+      ),
+      // Root route
+      GoRoute(
+        path: '/',
+        builder: (context, state) =>
+            onboardingComplete ? const HomePage() : const IntroPage(initialPage: 0),
       ),
     ],
   );
 }
-

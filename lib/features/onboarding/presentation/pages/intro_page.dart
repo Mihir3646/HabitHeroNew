@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../controllers/onboarding_controller.dart';
+import '../controller/onboarding_controller.dart';
 import '../widgets/progress_dots.dart';
 import 'privacy_page.dart';
 import 'theme_choice_page.dart';

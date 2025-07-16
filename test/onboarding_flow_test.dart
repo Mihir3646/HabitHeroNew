@@ -7,6 +7,7 @@ import 'package:habithero1/routes/app_pages.dart';
 import 'package:habithero1/theme_notifier.dart';
 import 'package:habithero1/features/onboarding/presentation/pages/whats_new_page.dart';
 import 'package:habithero1/features/onboarding/presentation/pages/welcome_page.dart';
+import 'package:habit_hero_new/routes/app_routes.dart';
 
 void main() => testWidgets('onboarding flow', (tester) async {
       SharedPreferences.setMockInitialValues({});

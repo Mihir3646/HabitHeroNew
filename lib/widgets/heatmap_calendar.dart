@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 
-import '../features/habit/data/habit_model.dart';
+import '../features/habit/data/models/habit_model.dart';
 
 class HabitHeatmapCalendar extends StatelessWidget {
   final Habit habit;

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../routes/app_routes.dart';
-import '../controller/onboarding_controller.dart';
 
 class WhatsNewPage extends StatelessWidget {
   const WhatsNewPage({super.key});
@@ -16,7 +12,6 @@ class WhatsNewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.find<OnboardingController>();
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -25,7 +20,9 @@ class WhatsNewPage extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.33, child: const FlutterLogo()),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.33,
+                      child: Image.asset('assets/mock_phones.png')),
                   const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -41,13 +38,7 @@ class WhatsNewPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: ElevatedButton(
-                    onPressed: () =>
-                        c.next(() => context.go(AppRoutes.dashboard)),
-                    child: const Text('Continue'))),
+
           ],
         ),
       ),

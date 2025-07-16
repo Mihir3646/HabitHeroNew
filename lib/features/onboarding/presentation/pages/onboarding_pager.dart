@@ -19,12 +19,12 @@ class _OnboardingPagerState extends State<OnboardingPager> {
   @override
   void initState() {
     super.initState();
-    _controller = OnboardingController();
+    _controller = OnboardingController()..onInit();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller.onClose();
     super.dispose();
   }
 

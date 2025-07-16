@@ -23,7 +23,7 @@ class _IntroPageState extends State<IntroPage> {
   @override
   void initState() {
     super.initState();
-    _controller = OnboardingController(widget.initialPage);
+    _controller = OnboardingController(widget.initialPage)..onInit();
     _pageController = _controller.pageController;
   }
 

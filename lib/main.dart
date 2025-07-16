@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
 import 'features/onboarding/presentation/controller/onboarding_controller.dart';
+import 'features/habit/presentation/controller/habit_controller.dart';
 
 import 'core/services/service_locator.dart';
 import 'core/theme/app_theme.dart';
@@ -20,6 +21,7 @@ Future<void> main() async {
   Get.put(onboardingController);
   sl.registerSingleton<OnboardingController>(onboardingController);
   await setupLocator();
+  Get.put(sl<HabitController>());
   runApp(MyApp(themeNotifier: ThemeNotifier(prefs), router: router));
 }
 

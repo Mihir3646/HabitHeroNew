@@ -43,3 +43,5 @@ app.*.map.json
 /android/app/release
 /android/.gradle/
 /android/app/*.cxx
+.idea/*
+pubspec.lock

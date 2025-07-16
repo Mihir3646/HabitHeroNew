@@ -30,7 +30,7 @@ class _OnboardingPagerState extends State<OnboardingPager> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
+    return Provider<OnboardingController>.value(
       value: _controller,
       child: Scaffold(
         body: Stack(

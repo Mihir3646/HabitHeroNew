@@ -8,6 +8,12 @@ class OnboardingController extends GetxController {
   late final PageController pageController;
   final currentPage = 0.obs;
 
+  /// Convenience getter to access the current page index as a plain integer.
+  ///
+  /// This is helpful when the controller is consumed via `Provider`/`Consumer`
+  /// which expect synchronous values instead of the Rx wrapper used by GetX.
+  int get page => currentPage.value;
+
   @override
   void onInit() {
     pageController = PageController(initialPage: initialPage);

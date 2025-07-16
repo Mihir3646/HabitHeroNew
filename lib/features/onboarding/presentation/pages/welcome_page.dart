@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../../../routes/app_routes.dart';
 import '../../../../core/services/service_locator.dart';
 import '../controller/onboarding_controller.dart';
 
@@ -44,20 +40,6 @@ class WelcomePage extends StatelessWidget {
                   const SizedBox(height: 16),
                   Expanded(child: ListView.builder(itemCount: _features.length, itemBuilder: (context, i) => _featureRow(context, primary, _features[i]))),
                 ],
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 56,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (c.isLastPage) {
-                    context.go(AppRoutes.dashboard);
-                  } else {
-                    c.next();
-                  }
-                },
-                child: const Text('Continue'),
               ),
             ),
           ],

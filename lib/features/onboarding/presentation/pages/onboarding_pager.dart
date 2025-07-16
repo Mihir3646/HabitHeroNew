@@ -5,6 +5,7 @@ import '../controller/onboarding_controller.dart';
 import '../widgets/progress_dots.dart';
 import 'welcome_page.dart';
 import 'whats_new_page.dart';
+import '../../../../routes/app_routes.dart';
 
 class OnboardingPager extends StatefulWidget {
   const OnboardingPager({super.key});
@@ -36,7 +37,7 @@ class _OnboardingPagerState extends State<OnboardingPager> {
           children: [
             PageView(
               controller: _controller.pageController,
-              onPageChanged: (i) => _controller.setPage(i),
+              onPageChanged: _controller.setPage,
               children: const [WhatsNewPage(), WelcomePage()],
             ),
             Positioned(
@@ -45,6 +46,19 @@ class _OnboardingPagerState extends State<OnboardingPager> {
               right: 0,
               child: Obx(
                 () => ProgressDots(count: 2, activeIndex: _controller.page),
+              ),
+            ),
+            Positioned(
+              bottom: 16,
+              left: 16,
+              right: 16,
+              child: SizedBox(
+                height: 56,
+                child: ElevatedButton(
+                  onPressed: () => _controller
+                      .next(() => Get.offAllNamed(AppRoutes.dashboard)),
+                  child: const Text('Continue'),
+                ),
               ),
             ),
           ],

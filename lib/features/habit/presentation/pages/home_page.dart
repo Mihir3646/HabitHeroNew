@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/services/service_locator.dart';
+import '../../../../core/services/service_locator.dart';
 import '../../domain/habit_repository.dart';
 import '../controllers/habit_list_controller.dart';
 import 'add_habit_page.dart';

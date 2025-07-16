@@ -18,9 +18,11 @@ void main() => testWidgets('onboarding continue', (tester) async {
   await tester.pumpWidget(MyApp(themeNotifier: ThemeNotifier(prefs), router: router));
   await tester.pumpAndSettle();
 
-  await tester.tap(find.text('Continue').first);
+  await tester.tap(find.text('Next'));
   await tester.pumpAndSettle();
-  await tester.tap(find.text('Continue').first);
+  await tester.tap(find.text('Next'));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('System Default'));
   await tester.pumpAndSettle();
 
   expect(router.location, AppRoutes.dashboard);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'routes/app_pages.dart';
 
 void main() {
@@ -10,7 +11,7 @@ class HabitHeroApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp.router(
       title: 'Habit Hero',
       theme: ThemeData(
         useMaterial3: true,

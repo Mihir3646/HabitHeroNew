@@ -24,7 +24,7 @@ class _IntroPageState extends State<IntroPage> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: widget.initialPage);
-    _controller = OnboardingController(widget.initialPage);
+    _controller = OnboardingController(initialPage: widget.initialPage);
   }
 
   void _goTo(int index) {
@@ -34,7 +34,7 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
+    return Provider<OnboardingController>.value(
       value: _controller,
       child: Scaffold(
         body: SafeArea(

@@ -6,6 +6,9 @@ import '../features/onboarding/presentation/pages/intro_page.dart';
 import '../features/onboarding/presentation/pages/onboarding_pager.dart';
 import 'app_routes.dart';
 
+// TODO: Persist completion flag in storage
+const bool onboardingComplete = false;
+
 GoRouter createRouter() {
   return GoRouter(
     initialLocation: AppRoutes.onboarding,

@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../data/habit_repository.dart';
-import '../../controllers/habit_controller.dart';
-import '../widgets/habit_tile.dart';
-import 'habit_form_page.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../routes/app_routes.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HabitController(HabitRepository()));
     return Scaffold(
-      appBar: AppBar(title: const Text('Habits')),
-      body: Obx(() {
-        final habits = controller.habits;
-        return ListView.builder(
-          itemCount: habits.length,
-          itemBuilder: (context, index) {
-            return HabitTile(habit: habits[index], controller: controller);
-          },
-        );
-      }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(() => HabitFormPage(controller: controller)),
-        child: const Icon(Icons.add),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.settings),
+          onPressed: () => context.go(AppRoutes.settings),
+        ),
+        title: const Text('Habits'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () => context.go(AppRoutes.habitForm),
+          ),
+        ],
       ),
+      body: const Center(child: Text('No habits yet')),
     );
   }
 }

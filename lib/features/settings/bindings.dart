@@ -1,0 +1,3 @@
+class SettingsBinding {
+  void dependencies() {}
+}

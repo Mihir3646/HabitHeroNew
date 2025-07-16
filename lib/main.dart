@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'features/habit/presentation/pages/dashboard_page.dart';
+import 'routes/app_pages.dart';
 
 void main() {
   runApp(const HabitHeroApp());
 }
 
 class HabitHeroApp extends StatelessWidget {
-  const HabitHeroApp({Key? key}) : super(key: key);
+  const HabitHeroApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Habit Hero',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const DashboardPage(),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF43A047)),
+      ),
+      routerConfig: router,
     );
   }
 }

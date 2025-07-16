@@ -1,0 +1,3 @@
+class HabitBinding {
+  void dependencies() {}
+}

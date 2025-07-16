@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 import '../controller/onboarding_controller.dart';
 import '../widgets/progress_dots.dart';
@@ -24,8 +24,8 @@ class _IntroPageState extends State<IntroPage> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: widget.initialPage);
     _controller = OnboardingController(widget.initialPage);
+    _pageController = _controller.pageController;
   }
 
   void _goTo(int index) {
@@ -54,11 +54,17 @@ class _IntroPageState extends State<IntroPage> {
                   ],
                 ),
               ),
-              Consumer<OnboardingController>(
-                builder: (context, controller, _) => Padding(padding: const EdgeInsets.symmetric(vertical: 16), child: ProgressDots(count: 3, activeIndex: controller.page)),
+            ),
+            Obx(
+              () => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: ProgressDots(
+                  count: 3,
+                  activeIndex: _controller.currentPage.value,
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

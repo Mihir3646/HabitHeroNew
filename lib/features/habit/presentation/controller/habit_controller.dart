@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../domain/habit_repository.dart';
+
 class HabitEntity {
   String? id;
   String name;
@@ -10,6 +12,10 @@ class HabitEntity {
 }
 
 class HabitController extends GetxController {
+  final HabitRepository repository;
+
+  HabitController(this.repository);
+
   final habits = <HabitEntity>[].obs;
 
   void addOrUpdate(HabitEntity h) {

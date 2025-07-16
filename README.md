@@ -59,7 +59,7 @@ Design mockups should include:
 ## 🛠 Tech Stack
 
 - **Framework**: Flutter
-- **State Management**: TBD (e.g., Provider, Riverpod, BLoC)
+- **State Management**: GetX
 - **Local Storage**: SharedPreferences / Hive / SQLite
 - **Reminders**: Flutter Local Notifications
 - **Backup Integration**: Google Drive API / iCloud (Platform channels)

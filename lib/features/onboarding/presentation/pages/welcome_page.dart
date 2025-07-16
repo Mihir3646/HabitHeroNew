@@ -1,77 +1,105 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../core/services/service_locator.dart';
 import '../controller/onboarding_controller.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
-  static const _features = [
-    (Icons.check_circle_outline, 'Track daily habits', 'Build consistency'),
-    (Icons.done_all, 'Streak rewards', 'Achieve milestones'),
-    (Icons.grid_view, 'Organize categories', 'Easy overview'),
-    (Icons.local_fire_department, 'Stay motivated', 'Keep the fire burning'),
-    (Icons.notifications, 'Timely reminders', 'Never miss a task'),
-    (Icons.palette, 'Theme options', 'Customize look'),
-    (Icons.history_toggle_off, 'Detailed stats', 'See history'),
-    (Icons.share, 'Share progress', 'With friends'),
-    (Icons.home_work_outlined, 'Backup data', 'Across devices'),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    final c = sl<OnboardingController>();
-    final primary = Theme.of(context).colorScheme.primary;
+    const textColor = Color(0xFF181711);
+
+    final controller = sl<OnboardingController>();
+
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _circleIconButton(
+                  icon: Icons.close,
+                  onTap: controller.next,
+                ),
+                _circleIconButton(
+                  icon: Icons.help_outline,
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  RichText(
-                    text: TextSpan(
-                      text: 'Welcome to Habit',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                      children: [TextSpan(text: 'Hero', style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: primary, fontWeight: FontWeight.bold))],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(24),
+                      child: AspectRatio(
+                        aspectRatio: 2 / 3,
+                        child: Image.network(
+                          'https://lh3.googleusercontent.com/aida-public/AB6AXuAQjObi6zKTAKhq6-QzUHaoVsNFQL7jhcHhtKCXcSkEShlPLPGNVe03UMy_M_9U1AW5Mi2BV77KfHK8HcW_XiK20XehC1qmw5tpY8Xfyr1X29QQaCt-Znu_Pwe6CmiIO0Qzy4GSsWOiINqzZUI2yNIokLLsaem9A-03E8uXMD5FJsbsOGIp-QtuLeWs_j0TmMqppMqoIxzv8NPgggJtjUJ_UvxZ-w-ZkLWJ5abZbVPzjR6wzdzianVdbAEzIbUl7FNDhbO-ocssafoF',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  Expanded(child: ListView.builder(itemCount: _features.length, itemBuilder: (context, i) => _featureRow(context, primary, _features[i]))),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      'Welcome to Habit Hero!',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.lexend(
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        height: 1.2,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      top: 12,
+                      bottom: 16,
+                    ),
+                    child: Text(
+                      'Track your habits and build better routines.',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.lexend(
+                        color: textColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
-}
 
-Widget _featureRow(BuildContext context, Color color, (IconData, String, String) data) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 4),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 48,
-          height: 48,
-          decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
-          child: Icon(data.$1, color: Theme.of(context).colorScheme.onPrimary),
+  Widget _circleIconButton({
+    required IconData icon,
+    required VoidCallback onTap,
+  }) =>
+      InkWell(
+        borderRadius: BorderRadius.circular(24),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(6),
+          child: Icon(icon, size: 28, color: const Color(0xFF181711)),
         ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(data.$2, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: color, fontWeight: FontWeight.bold)),
-              Text(data.$3, style: Theme.of(context).textTheme.bodySmall),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
+      );
 }

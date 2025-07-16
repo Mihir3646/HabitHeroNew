@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
+
+import 'features/onboarding/presentation/controller/onboarding_controller.dart';
 
 import 'core/services/service_locator.dart';
 import 'routes/app_pages.dart';
@@ -10,7 +13,9 @@ import 'theme_notifier.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  final router = createRouter();
+  final onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
+  final router = createRouter(onboardingComplete);
+  Get.lazyPut(() => OnboardingController());
   await setupLocator();
   runApp(MyApp(themeNotifier: ThemeNotifier(prefs), router: router));
 }

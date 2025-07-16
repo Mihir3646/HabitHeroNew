@@ -5,8 +5,7 @@ class ThemeNotifier extends ChangeNotifier {
   final SharedPreferences prefs;
   ThemeMode _themeMode;
 
-  ThemeNotifier(this.prefs)
-      : _themeMode = _getThemeModeFromPrefs(prefs);
+  ThemeNotifier(this.prefs) : _themeMode = _getThemeModeFromPrefs(prefs);
 
   ThemeMode get themeMode => _themeMode;
 

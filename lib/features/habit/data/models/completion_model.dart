@@ -1,5 +1,5 @@
-import 'package:hive/hive.dart';
 import 'package:habithero1/utils/hive_datetime_extensions.dart';
+import 'package:hive/hive.dart';
 
 part 'completion_model.g.dart';
 

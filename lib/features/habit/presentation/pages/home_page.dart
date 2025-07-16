@@ -26,9 +26,7 @@ class HomePage extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () async {
-                final added = await Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const AddHabitPage()),
-                );
+                final added = await Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AddHabitPage()));
                 if (added == true) {
                   controller.loadHabits();
                 }

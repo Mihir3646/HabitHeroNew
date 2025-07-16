@@ -18,10 +18,8 @@ class HabitRepositoryImpl implements HabitRepository {
   Future<void> deleteHabit(int key) => dataSource.deleteHabit(key);
 
   @override
-  Future<int> addCompletion(CompletionModel completion) =>
-      dataSource.addCompletion(completion);
+  Future<int> addCompletion(CompletionModel completion) => dataSource.addCompletion(completion);
 
   @override
-  List<CompletionModel> getCompletionsForHabit(int habitKey) =>
-      dataSource.getCompletionsForHabit(habitKey);
+  List<CompletionModel> getCompletionsForHabit(int habitKey) => dataSource.getCompletionsForHabit(habitKey);
 }

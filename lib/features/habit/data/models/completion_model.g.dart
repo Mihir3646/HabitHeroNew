@@ -8,10 +8,7 @@ class CompletionModelAdapter extends TypeAdapter<CompletionModel> {
 
   @override
   CompletionModel read(BinaryReader reader) {
-    return CompletionModel(
-      habitKey: reader.readInt(),
-      date: reader.readDateTime(),
-    );
+    return CompletionModel(habitKey: reader.readInt(), date: reader.readDateTime());
   }
 
   @override

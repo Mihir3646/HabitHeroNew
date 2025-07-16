@@ -7,7 +7,5 @@ import 'domain/habit_repository.dart';
 void registerHabitFeature(GetIt sl) {
   final dataSource = HiveDataSource();
   sl.registerSingleton<HiveDataSource>(dataSource);
-  sl.registerLazySingleton<HabitRepository>(
-    () => HabitRepositoryImpl(sl<HiveDataSource>()),
-  );
+  sl.registerLazySingleton<HabitRepository>(() => HabitRepositoryImpl(sl<HiveDataSource>()));
 }

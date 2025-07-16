@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/services/service_locator.dart';
 import 'routes/app_pages.dart';
 import 'theme_notifier.dart';
-import 'core/services/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,16 +30,8 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             title: 'Habit Hero',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              brightness: Brightness.light,
-            ),
-            darkTheme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.deepPurple,
-                brightness: Brightness.dark,
-              ),
-            ),
+            theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple), brightness: Brightness.light),
+            darkTheme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark)),
             themeMode: notifier.themeMode,
             routerConfig: router,
           );

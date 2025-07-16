@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ProgressDots extends StatelessWidget {
   final int count;
   final int activeIndex;
+
   const ProgressDots({super.key, required this.count, required this.activeIndex});
 
   @override
@@ -16,10 +17,7 @@ class ProgressDots extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 4),
           width: active ? 12 : 8,
           height: active ? 12 : 8,
-          decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(active ? 1 : 0.3),
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: Colors.blue.withOpacity(active ? 1 : 0.3), shape: BoxShape.circle),
         );
       }),
     );

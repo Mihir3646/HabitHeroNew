@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
-import '../models/habit_model.dart';
 import '../models/completion_model.dart';
+import '../models/habit_model.dart';
 
 class HiveDataSource {
   late Box<HabitModel> _habitBox;
@@ -22,11 +22,7 @@ class HiveDataSource {
   int get habitCount => _habitBox.length;
 
   // Completion CRUD
-  Future<int> addCompletion(CompletionModel completion) =>
-      _completionBox.add(completion);
+  Future<int> addCompletion(CompletionModel completion) => _completionBox.add(completion);
 
-  List<CompletionModel> getCompletionsForHabit(int habitKey) =>
-      _completionBox.values
-          .where((c) => c.habitKey == habitKey)
-          .toList();
+  List<CompletionModel> getCompletionsForHabit(int habitKey) => _completionBox.values.where((c) => c.habitKey == habitKey).toList();
 }

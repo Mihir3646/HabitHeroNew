@@ -27,10 +27,7 @@ class _AddHabitPageState extends State<AddHabitPage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
-              controller: _controller,
-              decoration: const InputDecoration(labelText: 'Habit name'),
-            ),
+            TextField(controller: _controller, decoration: const InputDecoration(labelText: 'Habit name')),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {

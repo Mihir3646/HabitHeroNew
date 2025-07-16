@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../theme_notifier.dart';
+
 class ThemeChoicePage extends StatelessWidget {
   final VoidCallback onComplete;
+
   const ThemeChoicePage({super.key, required this.onComplete});
 
   @override
@@ -15,16 +16,9 @@ class ThemeChoicePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Choose Your Theme',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
+            const Text('Choose Your Theme', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
             const SizedBox(height: 16),
-            const Text(
-              'Pick light or dark mode to get started.',
-              textAlign: TextAlign.center,
-            ),
+            const Text('Pick light or dark mode to get started.', textAlign: TextAlign.center),
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {

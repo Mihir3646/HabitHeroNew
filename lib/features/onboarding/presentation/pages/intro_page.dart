@@ -9,6 +9,7 @@ import 'theme_choice_page.dart';
 
 class IntroPage extends StatefulWidget {
   final int initialPage;
+
   const IntroPage({super.key, this.initialPage = 0});
 
   @override
@@ -45,18 +46,11 @@ class _IntroPageState extends State<IntroPage> {
                   onPageChanged: (i) {
                     _controller.setPage(i);
                   },
-                  children: [
-                    _IntroSlide(onNext: () => _goTo(1)),
-                    PrivacyPage(onNext: () => _goTo(2)),
-                    ThemeChoicePage(onComplete: () => context.go('/home')),
-                  ],
+                  children: [_IntroSlide(onNext: () => _goTo(1)), PrivacyPage(onNext: () => _goTo(2)), ThemeChoicePage(onComplete: () => context.go('/home'))],
                 ),
               ),
               Consumer<OnboardingController>(
-                builder: (context, controller, _) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: ProgressDots(count: 3, activeIndex: controller.page),
-                ),
+                builder: (context, controller, _) => Padding(padding: const EdgeInsets.symmetric(vertical: 16), child: ProgressDots(count: 3, activeIndex: controller.page)),
               ),
             ],
           ),
@@ -68,7 +62,9 @@ class _IntroPageState extends State<IntroPage> {
 
 class _IntroSlide extends StatelessWidget {
   final VoidCallback onNext;
+
   const _IntroSlide({required this.onNext});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -77,21 +73,11 @@ class _IntroSlide extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Welcome to Habit Hero!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
+            const Text('Welcome to Habit Hero!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
             const SizedBox(height: 16),
-            const Text(
-              'Track your habits and build better routines.',
-              textAlign: TextAlign.center,
-            ),
+            const Text('Track your habits and build better routines.', textAlign: TextAlign.center),
             const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: onNext,
-              child: const Text('Next'),
-            ),
+            ElevatedButton(onPressed: onNext, child: const Text('Next')),
           ],
         ),
       ),

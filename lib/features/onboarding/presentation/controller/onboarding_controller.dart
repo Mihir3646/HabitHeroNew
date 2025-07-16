@@ -7,10 +7,5 @@ class OnboardingController extends GetxController {
 
   bool get isLastPage => currentPage.value == 1;
 
-  void next(VoidCallback goToDashboard) => isLastPage
-      ? goToDashboard()
-      : pageController.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
+  void next(VoidCallback goToDashboard) => isLastPage ? goToDashboard() : pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
 }

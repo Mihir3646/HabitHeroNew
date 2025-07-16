@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class OnboardingController extends ChangeNotifier {
-  /// Controller to drive the [PageView] in the onboarding flow.
-  final PageController pageController;
+class OnboardingController extends GetxController {
+  OnboardingController([this.initialPage = 0]);
 
-  /// The index of the currently visible onboarding page.
-  int _page;
+  final int initialPage;
+  late final PageController pageController;
+  final currentPage = 0.obs;
 
-  OnboardingController({int initialPage = 0})
-      : _page = initialPage,
-        pageController = PageController(initialPage: initialPage);
-
-  int get page => _page;
-
-  bool get isLastPage => _page == 2; // update if page count changes
-
-  /// Update the current page index and notify listeners so that any listening
-  /// widgets can rebuild.
-  void setPage(int index) {
-    _page = index;
-    notifyListeners();
+  @override
+  void onInit() {
+    pageController = PageController(initialPage: initialPage);
+    currentPage.value = initialPage;
+    super.onInit();
   }
 
-  /// Either advance to the next onboarding page or call [goToDashboard] when
-  /// the onboarding flow is finished.
+  bool get isLastPage => currentPage.value == 1;
+
+  void setPage(int index) => currentPage.value = index;
+
   void next(VoidCallback goToDashboard) {
     if (isLastPage) {
       goToDashboard();
@@ -36,8 +31,8 @@ class OnboardingController extends ChangeNotifier {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     pageController.dispose();
-    super.dispose();
+    super.onClose();
   }
 }

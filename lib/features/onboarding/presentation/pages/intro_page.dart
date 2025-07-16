@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 import '../controller/onboarding_controller.dart';
 import '../widgets/progress_dots.dart';
@@ -23,8 +23,8 @@ class _IntroPageState extends State<IntroPage> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: widget.initialPage);
-    _controller = OnboardingController(initialPage: widget.initialPage);
+    _controller = OnboardingController(widget.initialPage);
+    _pageController = _controller.pageController;
   }
 
   void _goTo(int index) {
@@ -34,26 +34,31 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<OnboardingController>.value(
-      value: _controller,
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  onPageChanged: (i) {
-                    _controller.setPage(i);
-                  },
-                  children: [_IntroSlide(onNext: () => _goTo(1)), PrivacyPage(onNext: () => _goTo(2)), ThemeChoicePage(onComplete: () => context.go('/home'))],
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                controller: _pageController,
+                onPageChanged: _controller.setPage,
+                children: [
+                  _IntroSlide(onNext: () => _goTo(1)),
+                  PrivacyPage(onNext: () => _goTo(2)),
+                  ThemeChoicePage(onComplete: () => context.go('/home')),
+                ],
+              ),
+            ),
+            Obx(
+              () => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: ProgressDots(
+                  count: 3,
+                  activeIndex: _controller.currentPage.value,
                 ),
               ),
-              Consumer<OnboardingController>(
-                builder: (context, controller, _) => Padding(padding: const EdgeInsets.symmetric(vertical: 16), child: ProgressDots(count: 3, activeIndex: controller.page)),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

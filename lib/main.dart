@@ -5,11 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'routes/app_pages.dart';
 import 'theme_notifier.dart';
+import 'core/services/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   final router = createRouter(prefs.getBool('onboarding_complete') ?? false);
+  await setupLocator();
   runApp(MyApp(themeNotifier: ThemeNotifier(prefs), router: router));
 }
 

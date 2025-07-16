@@ -32,4 +32,16 @@ class HabitController extends GetxController {
     _repository.delete(id);
     habits.removeWhere((h) => h.id == id);
   }
+
+  Map<DateTime, int> completionsMap(int habitId) {
+    final index = habits.indexWhere((h) => h.id == habitId);
+    if (index == -1) return {};
+    final habit = habits[index];
+    final Map<DateTime, int> map = {};
+    for (final date in habit.completions) {
+      final day = DateTime(date.year, date.month, date.day);
+      map.update(day, (v) => v + 1, ifAbsent: () => 1);
+    }
+    return map;
+  }
 }

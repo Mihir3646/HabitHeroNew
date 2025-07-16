@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 import '../controller/onboarding_controller.dart';
 import '../widgets/progress_dots.dart';
@@ -19,37 +19,34 @@ class _OnboardingPagerState extends State<OnboardingPager> {
   @override
   void initState() {
     super.initState();
-    _controller = OnboardingController();
+    _controller = Get.put(OnboardingController());
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    Get.delete<OnboardingController>();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: _controller,
-      child: Scaffold(
-        body: Stack(
-          children: [
-            PageView(
-              controller: _controller.pageController,
-              onPageChanged: (i) => _controller.setPage(i),
-              children: const [WhatsNewPage(), WelcomePage()],
+    return Scaffold(
+      body: Stack(
+        children: [
+          PageView(
+            controller: _controller.pageController,
+            onPageChanged: _controller.setPage,
+            children: const [WhatsNewPage(), WelcomePage()],
+          ),
+          Positioned(
+            bottom: 16,
+            left: 0,
+            right: 0,
+            child: Obx(
+              () => ProgressDots(count: 2, activeIndex: _controller.currentPage.value),
             ),
-            Positioned(
-              bottom: 16,
-              left: 0,
-              right: 0,
-              child: Consumer<OnboardingController>(
-                builder: (context, c, _) => ProgressDots(count: 2, activeIndex: c.page),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

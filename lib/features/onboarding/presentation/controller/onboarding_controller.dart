@@ -25,9 +25,9 @@ class OnboardingController extends GetxController {
 
   void setPage(int index) => currentPage.value = index;
 
-  void next(VoidCallback goToDashboard) {
+  void next([VoidCallback? goToDashboard]) {
     if (isLastPage) {
-      goToDashboard();
+      goToDashboard?.call();
     } else {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),

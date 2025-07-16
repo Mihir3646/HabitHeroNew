@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'features/onboarding/presentation/controller/onboarding_controller.dart';
 
 import 'core/services/service_locator.dart';
+import 'core/theme/app_theme.dart';
 import 'routes/app_pages.dart';
 import 'theme_notifier.dart';
 
@@ -15,7 +16,9 @@ Future<void> main() async {
   final prefs = await SharedPreferences.getInstance();
   final onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
   final router = createRouter(onboardingComplete);
-  Get.lazyPut(() => OnboardingController());
+  final onboardingController = OnboardingController();
+  Get.put(onboardingController);
+  sl.registerSingleton<OnboardingController>(onboardingController);
   await setupLocator();
   runApp(MyApp(themeNotifier: ThemeNotifier(prefs), router: router));
 }
@@ -35,8 +38,8 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             title: 'Habit Hero',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple), brightness: Brightness.light),
-            darkTheme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark)),
+            theme: AppTheme.light(),
+            darkTheme: AppTheme.dark(),
             themeMode: notifier.themeMode,
             routerConfig: router,
           );

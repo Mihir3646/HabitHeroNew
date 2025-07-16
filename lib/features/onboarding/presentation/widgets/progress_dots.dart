@@ -8,21 +8,24 @@ class ProgressDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(count, (i) {
-        final active = i == activeIndex;
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          width: active ? 12 : 8,
-          height: active ? 12 : 8,
-          decoration: BoxDecoration(
-            color: Colors.blue.withAlpha(((active ? 1.0 : 0.3) * 255).toInt()),
-            shape: BoxShape.circle,
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(count, (i) {
+          final active = i == activeIndex;
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            width: active ? 12 : 8,
+            height: active ? 12 : 8,
+            decoration: BoxDecoration(
+              color: Colors.blue.withAlpha(((active ? 1.0 : 0.3) * 255).toInt()),
+              shape: BoxShape.circle,
+            ),
         );
       }),
+      ),
     );
   }
 }

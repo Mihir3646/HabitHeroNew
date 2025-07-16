@@ -32,22 +32,24 @@ class _OnboardingPagerState extends State<OnboardingPager> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          PageView(
-            controller: _controller.pageController,
-            onPageChanged: (i) => _controller.setPage(i),
-            children: const [WhatsNewPage(), WelcomePage()],
-          ),
-          Positioned(
-            bottom: 16,
-            left: 0,
-            right: 0,
-            child: Obx(
-              () => ProgressDots(count: 2, activeIndex: _controller.page),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            PageView(
+              controller: _controller.pageController,
+              onPageChanged: (i) => _controller.setPage(i),
+              children: const [WhatsNewPage(), WelcomePage()],
             ),
-          ),
-        ],
+            Positioned(
+              bottom: 80,
+              left: 0,
+              right: 0,
+              child: Obx(
+                () => ProgressDots(count: 2, activeIndex: _controller.page),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

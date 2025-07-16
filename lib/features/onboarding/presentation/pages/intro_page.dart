@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../controller/onboarding_controller.dart';
 import '../widgets/progress_dots.dart';
+import '../../../../routes/app_routes.dart';
 import 'privacy_page.dart';
 import 'theme_choice_page.dart';
 
@@ -28,25 +29,30 @@ class _IntroPageState extends State<IntroPage> {
   }
 
   void _goTo(int index) {
-    final paths = ['/', '/privacy', '/theme-choice'];
+    final paths = [AppRoutes.dashboard, '/privacy', '/theme-choice'];
     context.go(paths[index]);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: _controller.setPage,
-                children: [
-                  _IntroSlide(onNext: () => _goTo(1)),
-                  PrivacyPage(onNext: () => _goTo(2)),
-                  ThemeChoicePage(onComplete: () => context.go('/home')),
-                ],
+    return ChangeNotifierProvider.value(
+      value: _controller,
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: (i) {
+                    _controller.setPage(i);
+                  },
+                  children: [
+                    _IntroSlide(onNext: () => _goTo(1)),
+                    PrivacyPage(onNext: () => _goTo(2)),
+                    ThemeChoicePage(onComplete: () => context.go(AppRoutes.dashboard)),
+                  ],
+                ),
               ),
             ),
             Obx(

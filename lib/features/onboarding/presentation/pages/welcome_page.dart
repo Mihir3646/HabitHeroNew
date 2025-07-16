@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../routes/app_routes.dart';
 import '../controller/onboarding_controller.dart';
@@ -44,7 +44,14 @@ class WelcomePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(width: double.infinity, height: 56, child: ElevatedButton(onPressed: () => c.next(() => Get.offAllNamed(AppRoutes.dashboard)), child: const Text('Continue'))),
+            SizedBox(
+              width: double.infinity,
+              height: 56,
+              child: ElevatedButton(
+                onPressed: () => c.next(() => context.go(AppRoutes.dashboard)),
+                child: const Text('Continue'),
+              ),
+            ),
           ],
         ),
       ),

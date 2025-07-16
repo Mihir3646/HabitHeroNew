@@ -10,7 +10,8 @@ import 'theme_notifier.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  final router = createRouter();
+  final onboardingComplete = prefs.getBool('onboarding_complete') ?? false;
+  final router = createRouter(onboardingComplete);
   await setupLocator();
   runApp(MyApp(themeNotifier: ThemeNotifier(prefs), router: router));
 }

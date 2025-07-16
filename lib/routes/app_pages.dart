@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/onboarding/presentation/pages/onboarding_pager.dart';
+import 'app_routes.dart';
 import '../features/onboarding/presentation/pages/intro_page.dart';
 import '../features/habit/presentation/pages/home_page.dart';
 
-GoRouter createRouter(bool onboardingComplete) {
+GoRouter createRouter() {
   return GoRouter(
-    initialLocation: onboardingComplete ? '/home' : '/',
+    initialLocation: AppRoutes.onboarding,
     routes: [
       GoRoute(
+        path: AppRoutes.onboarding,
+        builder: (context, state) => OnboardingPager(),
         path: '/',
         builder: (context, state) =>
             onboardingComplete ? const HomePage() : const IntroPage(initialPage: 0),

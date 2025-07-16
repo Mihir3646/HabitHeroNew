@@ -6,6 +6,7 @@ import '../controller/onboarding_controller.dart';
 import '../widgets/progress_dots.dart';
 import 'privacy_page.dart';
 import 'theme_choice_page.dart';
+import '../../../../routes/app_routes.dart';
 
 class IntroPage extends StatefulWidget {
   final int initialPage;
@@ -28,7 +29,7 @@ class _IntroPageState extends State<IntroPage> {
   }
 
   void _goTo(int index) {
-    final paths = ['/', '/privacy', '/theme-choice'];
+    final paths = ['/onboarding', '/onboarding/privacy', '/onboarding/theme-choice'];
     context.go(paths[index]);
   }
 
@@ -45,13 +46,15 @@ class _IntroPageState extends State<IntroPage> {
                 children: [
                   _IntroSlide(onNext: () => _goTo(1)),
                   PrivacyPage(onNext: () => _goTo(2)),
-                  ThemeChoicePage(onComplete: () => context.go('/home')),
+                  ThemeChoicePage(
+                    onComplete: () => context.go(AppRoutes.dashboard),
+                  ),
                 ],
               ),
             ),
             Obx(
               () => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.only(bottom: 24),
                 child: ProgressDots(
                   count: 3,
                   activeIndex: _controller.currentPage.value,

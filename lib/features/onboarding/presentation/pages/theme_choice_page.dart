@@ -5,18 +5,17 @@ import 'package:provider/provider.dart';
 import '../../../../theme_notifier.dart';
 
 /// Page allowing the user to pick a theme when first opening the app.
-class ThemeChoicePage extends StatefulWidget {
+class ThemeChoicePage extends StatelessWidget {
   final VoidCallback onComplete;
 
   const ThemeChoicePage({super.key, required this.onComplete});
 
-  @override
-  State<ThemeChoicePage> createState() => _ThemeChoicePageState();
-}
-
-class _ThemeChoicePageState extends State<ThemeChoicePage> {
-  /// 0 -> light, 1 -> dark, 2 -> system
-  int _selectedTheme = 0;
+  void _choose(BuildContext context, ThemeMode mode) {
+    final notifier = context.read<ThemeNotifier>();
+    notifier.setThemeMode(mode);
+    notifier.completeOnboarding();
+    onComplete();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,7 @@ class _ThemeChoicePageState extends State<ThemeChoicePage> {
                   Expanded(
                     child: Center(
                       child: Text(
-                        'Theme Selection',
+                        'Choose Your Theme',
                         style: GoogleFonts.lexend(
                           color: textColor,
                           fontWeight: FontWeight.bold,
@@ -81,7 +80,7 @@ class _ThemeChoicePageState extends State<ThemeChoicePage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Text(
-                        'Select Your Theme',
+                        'Choose Your Theme',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.lexend(
                           color: textColor,
@@ -98,7 +97,7 @@ class _ThemeChoicePageState extends State<ThemeChoicePage> {
                         bottom: 8,
                       ),
                       child: Text(
-                        'Choose light or dark mode to begin.',
+                        'Pick light or dark mode to get started.',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.lexend(
                           color: textColor,
@@ -111,14 +110,48 @@ class _ThemeChoicePageState extends State<ThemeChoicePage> {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         children: [
-                          _themeOption(0, 'Light Mode'),
-                          const SizedBox(height: 12),
-                          _themeOption(1, 'Dark Mode'),
-                          const SizedBox(height: 12),
-                          _themeOption(2, 'System Default'),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 56,
+                            child: ElevatedButton(
+                              onPressed: () => _choose(context, ThemeMode.light),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: bgYellow,
+                                foregroundColor: textColor,
+                              ),
+                              child: const Text('Light Mode'),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 56,
+                            child: ElevatedButton(
+                              onPressed: () => _choose(context, ThemeMode.dark),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: bgYellow,
+                                foregroundColor: textColor,
+                              ),
+                              child: const Text('Dark Mode'),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 56,
+                            child: ElevatedButton(
+                              onPressed: () => _choose(context, ThemeMode.system),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: bgYellow,
+                                foregroundColor: textColor,
+                              ),
+                              child: const Text('System Default'),
+                            ),
+                          ),
                         ],
                       ),
                     ),
+                    const SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -129,35 +162,7 @@ class _ThemeChoicePageState extends State<ThemeChoicePage> {
                         _dot(true),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: _onContinue,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: bgYellow,
-                            foregroundColor: textColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(28),
-                            ),
-                            elevation: 0,
-                            textStyle: GoogleFonts.lexend(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          child: const Text(
-                            'Continue',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),
@@ -166,23 +171,6 @@ class _ThemeChoicePageState extends State<ThemeChoicePage> {
         ),
       ),
     );
-  }
-
-  void _onContinue() {
-    final notifier = context.read<ThemeNotifier>();
-    switch (_selectedTheme) {
-      case 0:
-        notifier.setThemeMode(ThemeMode.light);
-        break;
-      case 1:
-        notifier.setThemeMode(ThemeMode.dark);
-        break;
-      case 2:
-      default:
-        notifier.setThemeMode(ThemeMode.system);
-    }
-    notifier.completeOnboarding();
-    widget.onComplete();
   }
 
   Widget _dot(bool active) => Container(
@@ -206,45 +194,4 @@ class _ThemeChoicePageState extends State<ThemeChoicePage> {
           child: Icon(icon, size: 28, color: const Color(0xFF181711)),
         ),
       );
-
-  Widget _themeOption(int value, String title) {
-    const borderColor = Color(0xFFE6E5DB);
-    const textColor = Color(0xFF181711);
-    return InkWell(
-      borderRadius: BorderRadius.circular(16),
-      onTap: () => setState(() => _selectedTheme = value),
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: borderColor,
-            width: 1.5,
-          ),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Row(
-          children: [
-            Radio<int>(
-              value: value,
-              groupValue: _selectedTheme,
-              onChanged: (v) => setState(() => _selectedTheme = v!),
-              activeColor: textColor,
-              fillColor: MaterialStateProperty.all(textColor),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                title,
-                style: GoogleFonts.lexend(
-                  color: textColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

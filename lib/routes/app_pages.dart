@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/onboarding/presentation/pages/intro_page.dart';
+import '../features/habit/presentation/pages/home_page.dart';
 
 GoRouter createRouter(bool onboardingComplete) {
   return GoRouter(
@@ -10,7 +11,7 @@ GoRouter createRouter(bool onboardingComplete) {
       GoRoute(
         path: '/',
         builder: (context, state) =>
-            onboardingComplete ? const _PlaceholderHome() : const IntroPage(initialPage: 0),
+            onboardingComplete ? const HomePage() : const IntroPage(initialPage: 0),
         routes: [
           if (!onboardingComplete) ...[
             GoRoute(
@@ -24,7 +25,7 @@ GoRouter createRouter(bool onboardingComplete) {
           ],
           GoRoute(
             path: 'home',
-            builder: (context, state) => const _PlaceholderHome(),
+            builder: (context, state) => const HomePage(),
           ),
         ],
       ),
@@ -32,12 +33,3 @@ GoRouter createRouter(bool onboardingComplete) {
   );
 }
 
-class _PlaceholderHome extends StatelessWidget {
-  const _PlaceholderHome();
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Home')),
-    );
-  }
-}

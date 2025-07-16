@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../routes/app_routes.dart';
 import '../../../../core/services/service_locator.dart';
@@ -51,7 +52,7 @@ class WelcomePage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   if (c.isLastPage) {
-                    Get.offAllNamed(AppRoutes.dashboard);
+                    context.go(AppRoutes.dashboard);
                   } else {
                     c.next();
                   }

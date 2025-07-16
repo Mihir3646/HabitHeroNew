@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../controllers/habit_list_controller.dart';
+import '../providers/habit_provider.dart';
 
 class AddHabitPage extends StatefulWidget {
   const AddHabitPage({super.key});
@@ -33,7 +33,14 @@ class _AddHabitPageState extends State<AddHabitPage> {
               onPressed: () {
                 final title = _controller.text.trim();
                 if (title.isNotEmpty) {
-                  context.read<HabitListController>().addHabit(title);
+                  context.read<HabitProvider>().addHabit(
+                        HabitData(
+                          id: DateTime.now().microsecondsSinceEpoch.toString(),
+                          name: title,
+                          icon: Icons.check,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      );
                   Navigator.of(context).pop(true);
                 }
               },

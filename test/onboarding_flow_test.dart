@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() => testWidgets('onboarding flow', (tester) async {
   SharedPreferences.setMockInitialValues({});
   final prefs = await SharedPreferences.getInstance();
-  final router = createRouter();
+  final router = createRouter(false);
 
   await tester.pumpWidget(MyApp(themeNotifier: ThemeNotifier(prefs), router: router));
   await tester.pumpAndSettle();

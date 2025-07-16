@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../routes/app_routes.dart';
+import '../../../../core/services/service_locator.dart';
 import '../controller/onboarding_controller.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -21,7 +22,7 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.find<OnboardingController>();
+    final c = sl<OnboardingController>();
     final primary = Theme.of(context).colorScheme.primary;
     return SafeArea(
       child: Padding(
@@ -44,7 +45,20 @@ class WelcomePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(width: double.infinity, height: 56, child: ElevatedButton(onPressed: () => c.next(() => Get.offAllNamed(AppRoutes.dashboard)), child: const Text('Continue'))),
+            SizedBox(
+              width: double.infinity,
+              height: 56,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (c.isLastPage) {
+                    Get.offAllNamed(AppRoutes.dashboard);
+                  } else {
+                    c.next();
+                  }
+                },
+                child: const Text('Continue'),
+              ),
+            ),
           ],
         ),
       ),

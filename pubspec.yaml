@@ -13,6 +13,7 @@ dependencies:
   flutter_slidable: ^2.0.0
   flutter_colorpicker: ^1.0.3
   material_symbols_icons: ^4.2746.0
+  flutter_heatmap_calendar: ^1.0.5
 
 dev_dependencies:
   flutter_test:

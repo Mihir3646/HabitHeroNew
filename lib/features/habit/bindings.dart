@@ -1,0 +1,13 @@
+import 'package:get_it/get_it.dart';
+
+import 'data/datasources/hive_data_source.dart';
+import 'data/repositories/habit_repository_impl.dart';
+import 'domain/habit_repository.dart';
+
+void registerHabitFeature(GetIt sl) {
+  final dataSource = HiveDataSource();
+  sl.registerSingleton<HiveDataSource>(dataSource);
+  sl.registerLazySingleton<HabitRepository>(
+    () => HabitRepositoryImpl(sl<HiveDataSource>()),
+  );
+}

@@ -28,11 +28,12 @@ GoRouter createRouter(bool onboardingComplete) {
       GoRoute(path: '/', builder: (context, state) => onboardingComplete ? const DashboardPage() : const IntroPage(initialPage: 0)),
       // Habit form
       GoRoute(
-        path: '${AppRoutes.habitForm}/:id?',
-        builder: (_, state) {
-          final id = state.params['id'];
-          return HabitFormPage(habitId: id);
-        },
+        path: AppRoutes.habitForm,
+        builder: (_, __) => const HabitFormPage(),
+      ),
+      GoRoute(
+        path: '${AppRoutes.habitForm}/:id',
+        builder: (_, state) => HabitFormPage(habitId: state.params['id']),
       ),
     ],
   );

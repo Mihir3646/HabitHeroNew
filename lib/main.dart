@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'routes/app_pages.dart';
 import 'features/onboarding/bindings.dart';
+import 'service_locator.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initServiceLocator();
   runApp(const HabitHeroApp());
 }
 

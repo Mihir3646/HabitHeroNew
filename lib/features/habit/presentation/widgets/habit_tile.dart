@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../../habit/controllers/habit_controller.dart';
-import '../../../habit/data/habit_model.dart';
+import '../../../habit/data/models/habit_model.dart';
 import '../pages/habit_form_page.dart';
 import 'package:get/get.dart';
 import '../../../../widgets/heatmap_calendar.dart';

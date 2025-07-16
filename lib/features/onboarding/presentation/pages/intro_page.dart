@@ -48,7 +48,7 @@ class _IntroPageState extends State<IntroPage> {
                   children: [
                     _IntroSlide(onNext: () => _goTo(1)),
                     PrivacyPage(onNext: () => _goTo(2)),
-                    ThemeChoicePage(onStart: () => context.go('/home')),
+                    ThemeChoicePage(onComplete: () => context.go('/home')),
                   ],
                 ),
               ),

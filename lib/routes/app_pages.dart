@@ -30,7 +30,7 @@ GoRouter createRouter(bool onboardingComplete) {
       GoRoute(
         path: '${AppRoutes.habitForm}/:id?',
         builder: (_, state) {
-          final id = state.pathParameters['id'];
+          final id = state.params['id'];
           return HabitFormPage(habitId: id);
         },
       ),

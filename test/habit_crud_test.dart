@@ -17,7 +17,7 @@ void main() {
         GoRoute(path: AppRoutes.dashboard, builder: (_, __) => const DashboardPage()),
         GoRoute(
           path: '${AppRoutes.habitForm}/:id?',
-          builder: (_, state) => HabitFormPage(habitId: state.pathParameters['id']),
+          builder: (_, state) => HabitFormPage(habitId: state.params['id']),
         ),
       ],
     );

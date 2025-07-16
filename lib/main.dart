@@ -1,25 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'routes/app_pages.dart';
+import 'theme_notifier.dart';
 import 'core/services/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final router = createRouter(prefs.getBool('onboarding_complete') ?? false);
   await setupLocator();
-  runApp(const MyApp());
+  runApp(MyApp(themeNotifier: ThemeNotifier(prefs), router: router));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeNotifier themeNotifier;
+  final GoRouter router;
+
+  const MyApp({super.key, required this.themeNotifier, required this.router});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Habit Hero',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return ChangeNotifierProvider.value(
+      value: themeNotifier,
+      child: Consumer<ThemeNotifier>(
+        builder: (context, notifier, _) {
+          return MaterialApp.router(
+            title: 'Habit Hero',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              brightness: Brightness.light,
+            ),
+            darkTheme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.deepPurple,
+                brightness: Brightness.dark,
+              ),
+            ),
+            themeMode: notifier.themeMode,
+            routerConfig: router,
+          );
+        },
       ),
-      routerConfig: router,
     );
   }
 }

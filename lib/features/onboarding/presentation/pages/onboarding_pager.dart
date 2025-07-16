@@ -1,23 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../controller/onboarding_controller.dart';
 import '../widgets/progress_dots.dart';
 import 'welcome_page.dart';
 import 'whats_new_page.dart';
 
-class OnboardingPager extends StatelessWidget {
-  OnboardingPager({super.key});
-
-  final c = Get.put(OnboardingController());
+class OnboardingPager extends StatefulWidget {
+  const OnboardingPager({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    body: Stack(
-      children: [
-        PageView(controller: c.pageController, onPageChanged: (i) => c.currentPage.value = i, children: const [WhatsNewPage(), WelcomePage()]),
-        Positioned(bottom: 16, left: 0, right: 0, child: Obx(() => ProgressDots(count: 2, activeIndex: c.currentPage.value))),
-      ],
-    ),
-  );
+  State<OnboardingPager> createState() => _OnboardingPagerState();
+}
+
+class _OnboardingPagerState extends State<OnboardingPager> {
+  late final OnboardingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = OnboardingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider.value(
+      value: _controller,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            PageView(
+              controller: _controller.pageController,
+              onPageChanged: (i) => _controller.setPage(i),
+              children: const [WhatsNewPage(), WelcomePage()],
+            ),
+            Positioned(
+              bottom: 16,
+              left: 0,
+              right: 0,
+              child: Consumer<OnboardingController>(
+                builder: (context, c, _) => ProgressDots(count: 2, activeIndex: c.page),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

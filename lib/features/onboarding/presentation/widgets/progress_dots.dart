@@ -17,7 +17,10 @@ class ProgressDots extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 4),
           width: active ? 12 : 8,
           height: active ? 12 : 8,
-          decoration: BoxDecoration(color: Colors.blue.withOpacity(active ? 1 : 0.3), shape: BoxShape.circle),
+          decoration: BoxDecoration(
+            color: Colors.blue.withAlpha(((active ? 1.0 : 0.3) * 255).toInt()),
+            shape: BoxShape.circle,
+          ),
         );
       }),
     );

@@ -21,7 +21,6 @@ Future<void> main() async {
   Get.put(onboardingController);
   sl.registerSingleton<OnboardingController>(onboardingController);
   await setupLocator();
-  Get.put(sl<HabitController>());
   runApp(MyApp(themeNotifier: ThemeNotifier(prefs), router: router));
 }
 
